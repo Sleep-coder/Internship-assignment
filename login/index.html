@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Login Form -->
+      <div class="form-container" id="login-form-container">
+        <div class="form-header">
+          <h2>Login</h2>
+          <button class="toggle-btn" onclick="toggleForm('register')">
+            Register
+          </button>
+        </div>
+        <form id="login-form" onsubmit="return validateLogin()">
+          <input type="text" id="login-email" placeholder="Email" />
+          <input type="password" id="login-password" placeholder="Password" />
+          <button type="submit">Login</button>
+          <p id="login-error" class="error-message"></p>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div class="form-container hidden" id="register-form-container">
+        <div class="form-header">
+          <h2>Register</h2>
+          <button class="toggle-btn" onclick="toggleForm('login')">
+            Login
+          </button>
+        </div>
+        <form id="register-form" onsubmit="return validateRegister()">
+          <input type="text" id="register-email" placeholder="Email" />
+          <input
+            type="password"
+            id="register-password"
+            placeholder="Password" />
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm Password" />
+          <button type="submit">Register</button>
+          <p id="register-error" class="error-message"></p>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
