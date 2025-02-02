@@ -1,3 +1,29 @@
+const buttons = [
+  ["7", "8", "9", "+"],
+  ["4", "5", "6", "-"],
+  ["1", "2", "3", "*"],
+  ["0", ".", "=", "/"],
+  ["C", "<"],
+];
+const keysDiv = document.getElementById("keys");
+
+buttons.forEach((row) => {
+  row.forEach((btn) => {
+    const button = document.createElement("button");
+    button.textContent = btn;
+    if (isNaN(btn) && btn !== ".") button.className = "operator-btn";
+    button.onclick = () => handleButton(btn);
+    keysDiv.appendChild(button);
+  });
+});
+
+function handleButton(btn) {
+  if (btn === "=") return calculate();
+  if (btn === "C") return clearDisplay();
+  if (btn === "<") return backSpace();
+  appendToDisplay(btn);
+}
+
 const display = document.getElementById("display");
 let shouldClearDisplay = false;
 
@@ -6,13 +32,11 @@ function isOperator(input) {
 }
 
 function appendToDisplay(input) {
-  // Clear error state if present
   if (display.value === "Error") {
     display.value = "";
     shouldClearDisplay = false;
   }
 
-  // Handle post-calculation state
   if (shouldClearDisplay) {
     if (isOperator(input)) {
     } else {
@@ -24,11 +48,6 @@ function appendToDisplay(input) {
   display.value += input;
 }
 
-function clearDisplay() {
-  display.value = "";
-  shouldClearDisplay = false;
-}
-
 function calculate() {
   try {
     display.value = eval(display.value);
@@ -37,6 +56,11 @@ function calculate() {
     display.value = "Error";
     shouldClearDisplay = true;
   }
+}
+
+function clearDisplay() {
+  display.value = "";
+  shouldClearDisplay = false;
 }
 
 function backSpace() {
