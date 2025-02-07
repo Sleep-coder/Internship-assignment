@@ -31,6 +31,23 @@ function isOperator(input) {
   return ["+", "-", "*", "/"].includes(input);
 }
 
+// function appendToDisplay(input) {
+//   if (display.value === "Error") {
+//     display.value = "";
+//     shouldClearDisplay = false;
+//   }
+
+//   if (shouldClearDisplay) {
+//     if (isOperator(input)) {
+//     } else {
+//       display.value = "";
+//     }
+//     shouldClearDisplay = false;
+//   }
+
+//   display.value += input;
+// }
+
 function appendToDisplay(input) {
   if (display.value === "Error") {
     display.value = "";
@@ -39,10 +56,17 @@ function appendToDisplay(input) {
 
   if (shouldClearDisplay) {
     if (isOperator(input)) {
+      // Prevent appending an operator after result or clearing
     } else {
       display.value = "";
     }
     shouldClearDisplay = false;
+  }
+
+  // Prevent multiple consecutive operators, replacing the previous one
+  if (isOperator(input) && isOperator(display.value.slice(-1))) {
+    display.value = display.value.slice(0, -1) + input; // Replace the last operator
+    return;
   }
 
   display.value += input;
